@@ -13,26 +13,22 @@ const Second = () => {
 
   const [isNum, setIsNum] = useState('');
 
-  useEffect(() => {
-    console.log(isNum);
-  }, [isNum]);
-
-  async function handleInput(e) {
-    let userInput = e.target.value;
-    let checkedNum = /[0-9|\b|/]/g;
+  const handleInput = e => {
+    const userInput = e.target.value;
+    const checkedNum = /[0-9|\b|/]/g;
 
     if (!checkedNum.test(userInput)) {
       alert('숫자만 입력해주세요');
       await setIsNum('');
     } else {
-      await setIsNum(userInput);
-      if (isNum >= 1000) {
-        alert('1,000 이하로 입력해주세요');
-        await setIsNum(() => '');
-      }
+      const regexp = /\B(?=(\d{3})+(?!\d))/g;
+      const addComma = userInput.replace(regexp, ',');
+      // const addComma = Number(userInput).toLocaleString();
+
+      setIsNum(addComma);
     }
     // console.log(isNum);
-  }
+  };
 
   return (
     <Container>
