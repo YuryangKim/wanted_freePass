@@ -7,7 +7,7 @@
 <p>팀장: 이용우 <br>
 팀구성: 김유량, 양주영, 이용우, 홍유진</p>
 
-**배포주소** : <br>
+**배포주소** : http://wanted.freepass.s3-website.ap-northeast-2.amazonaws.com/<br>
 **설치 및 시작방법**
 
 - npm i 패키지 설치
@@ -19,10 +19,10 @@
 - View (React.js, React-Router, Styled-components)
 - Build Tool (Create React App)
 - Code Quality Tool (Prettier)
-- Other Tools (Git, Github, notion, Slack.)
+- Other Tools (Git, Github, notion, Slack. AWS)
 ```
 
-## 1. 와이어바알리
+## 1. 계산기
 
 <p>멤버 : 양주영, 이용우</p>
 
@@ -35,7 +35,7 @@
 - 송금액의 값을 제출 한다면 수취금액 노출
 - 송금액 입력값에 조건식을 추가 <br>(숫자가 아닐 때, 0보다 작은금액, 10000 보다 큰 값 일 때 팝업알림)
 
-## 2. 레드브릭
+## 2. 계산기
 
 <p>멤버 : 김유량, 홍유진</p>
 
