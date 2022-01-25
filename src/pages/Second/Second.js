@@ -14,18 +14,18 @@ const Second = () => {
   const [isNum, setIsNum] = useState('');
 
   const handleInput = e => {
-    let userInput = e.target.value;
-    let checkedNum = /[0-9|\b|/]/g;
+    const userInput = e.target.value;
+    const checkedNum = /[0-9|\b|/]/g;
 
     if (!checkedNum.test(userInput)) {
       alert('숫자만 입력해주세요');
       setIsNum('');
     } else {
-      setIsNum(userInput);
-      if (isNum >= 1000) {
-        alert('1,000 이하로 입력해주세요');
-        setIsNum(() => '1000');
-      }
+      const regexp = /\B(?=(\d{3})+(?!\d))/g;
+      const addComma = userInput.replace(regexp, ',');
+      // const addComma = Number(userInput).toLocaleString();
+
+      setIsNum(addComma);
     }
   };
 
