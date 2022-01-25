@@ -7,16 +7,15 @@
 <p>팀장: 이용우 <br>
 팀구성: 김유량, 양주영, 이용우, 홍유진</p>
 
-배포주소 : http://wanted.freepass.s3-website.ap-northeast-2.amazonaws.com/<br>
-설치 및 시작방법
+**배포주소** : http://wanted.freepass.s3-website.ap-northeast-2.amazonaws.com/<br>
+**설치 및 시작방법**
 
 - npm i 패키지 설치
 - npm start 로컬서버 실행
 
-<br/>
-
 ## ⚙️ Tools
 
+```
 - View (React.js, React-Router, Styled-components)
 - Build Tool (Create React App)
 - Code Quality Tool (Prettier)
@@ -55,3 +54,4 @@
 - 환율에 따른 드롭다운 메뉴 선택시 해당 화면에 노출
 - 드롭다운 메뉴에서 선택한 통화와 탭에서 선택한 통화의 환율을 계산하여 화면에 노출
 - 기준일의 형식에 맞는 날짜 포맷팅
+```
