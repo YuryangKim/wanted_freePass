@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
+import { getAllByAltText } from '@testing-library/react';
 
 const Second = () => {
   const CODE_DATA = [
@@ -12,6 +14,9 @@ const Second = () => {
   ];
 
   const [isNum, setIsNum] = useState('');
+  const [selected, setSelected] = useState('USD');
+  const [shownTab, setShownTab] = useState('CAD');
+  const [data, setData] = useState({});
 
   const handleInput = e => {
     const userInput = e.target.value;
@@ -19,15 +24,43 @@ const Second = () => {
 
     if (!checkedNum.test(userInput)) {
       alert('숫자만 입력해주세요');
-      await setIsNum('');
+      setIsNum('');
     } else {
       const regexp = /\B(?=(\d{3})+(?!\d))/g;
       const addComma = userInput.replace(regexp, ',');
-      // const addComma = Number(userInput).toLocaleString();
 
       setIsNum(addComma);
     }
-    // console.log(isNum);
+  };
+
+  const handleSelect = e => {
+    setSelected(e.target.value);
+  };
+
+  const tabOnClick = shownTab => {
+    setShownTab(shownTab);
+  };
+
+  useEffect(() => {
+    axios
+      .get(
+        'http://apilayer.net/api/live?access_key=98a575f114ea8d97dd94ca346383fab6'
+      )
+      .then(res => {
+        setData(res.data.quotes);
+      });
+  }, []);
+
+  const shownExchangeRate =
+    Number(isNum) * (data['USD' + shownTab] / data['USD' + selected]);
+
+  const getToday = () => {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.toLocaleString('en-EN', { month: 'short' });
+    const day = ('0' + date.getDate()).slice(-2);
+
+    return year + '-' + month + '-' + day;
   };
 
   return (
@@ -38,7 +71,12 @@ const Second = () => {
           value={isNum}
           onChange={handleInput}
         />
-        <SelectBox name="moneys" id="moneys">
+        <SelectBox
+          name="moneys"
+          id="moneys"
+          value={selected}
+          onChange={handleSelect}
+        >
           {CODE_DATA.map(({ id, code }) => {
             return (
               <OptionTag key={id} value={code}>
@@ -50,15 +88,24 @@ const Second = () => {
       </Form>
       <TabWrapper>
         <TabList>
-          <Tab>USD</Tab>
-          <Tab>USD</Tab>
-          <Tab>USD</Tab>
-          <Tab>USD</Tab>
-          <Tab>USD</Tab>
+          {CODE_DATA.filter(({ code }) => code !== selected).map(
+            ({ id, code }) => (
+              <Tab
+                key={id}
+                shownTab={shownTab}
+                code={code}
+                onClick={event => tabOnClick(code)}
+              >
+                {code}
+              </Tab>
+            )
+          )}
         </TabList>
         <TabContents>
-          <Result>CAD 2,000.00</Result>
-          <ReferDate>기준일 : 2022-Jan-01</ReferDate>
+          <Result>
+            {shownTab} {shownExchangeRate.toFixed(2).toLocaleString()}
+          </Result>
+          <ReferDate>기준일 : {getToday()}</ReferDate>
         </TabContents>
       </TabWrapper>
     </Container>
@@ -68,10 +115,10 @@ const Second = () => {
 export default Second;
 
 const Container = styled.div`
-  width: 300px;
+  width: 400px;
   margin: 100px auto;
   padding: 20px;
-  border: 3px solid black;
+  border: 2px solid black;
 `;
 
 const Form = styled.div`
@@ -80,10 +127,12 @@ const Form = styled.div`
 `;
 
 const NumInput = styled.input`
+  padding: 8px 16px;
   border: 1px solid black;
 `;
 
 const SelectBox = styled.select`
+  padding: 8px;
   border: 1px solid black;
 `;
 
@@ -92,37 +141,49 @@ const OptionTag = styled.option`
 `;
 
 const TabWrapper = styled.div`
-  margin: 20px 0;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 const TabList = styled.ul`
   display: flex;
   justify-content: space-between;
+  border: 1px solid black;
+  border-right: none;
   font-size: 14px;
 `;
 
 const Tab = styled.li`
-  padding: 5px 0;
-  border: 1px solid black;
+  width: 100%;
+  padding: 8px 0;
+  display: flex;
+  justify-content: center;
+  border-right: 1px solid black;
   cursor: pointer;
+  background-color: ${({ shownTab, code }) => shownTab === code && 'pink'};
 `;
 
 const TabContents = styled.div`
   width: 100%;
-  height: 150px;
+  height: 200px;
   border: 1px solid black;
-  padding: 10px;
+  border-top: none;
+  padding: 25px 30px;
 `;
 
 const Result = styled.h3`
   font-size: 16px;
   font-weight: bold;
   line-height: 1.5;
+  /* display: flex;
+  justify-content: space-between; */
 `;
 
 const ReferDate = styled.span`
   display: block;
-  font-size: 14px;
-  line-height: 1.5;
+  color: grey;
+  font-size: 12px;
   padding-top: 15px;
 `;
