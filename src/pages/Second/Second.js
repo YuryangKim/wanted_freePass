@@ -19,7 +19,7 @@ const Second = () => {
 
     if (!checkedNum.test(userInput)) {
       alert('숫자만 입력해주세요');
-      await setIsNum('');
+      setIsNum('');
     } else {
       const regexp = /\B(?=(\d{3})+(?!\d))/g;
       const addComma = userInput.replace(regexp, ',');
