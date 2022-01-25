@@ -46,7 +46,6 @@ const Exchangerate = () => {
   return (
     <Container>
       <Form>
-        <Title>환율계산</Title>
         <Text>송금국가: 미국(USD)</Text>
         <ReceiptWrap>
           <Text>수취국가:</Text>
