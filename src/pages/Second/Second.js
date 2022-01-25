@@ -13,13 +13,20 @@ const Second = () => {
 
   const [isNum, setIsNum] = useState('');
 
-  const [isSelected, setIsSelected] = useState(false);
-
   const handleInput = e => {
-    const regexp = /d+[,]?/g;
-    setIsNum(e.target.value);
+    let userInput = e.target.value;
+    let checkedNum = /[0-9|\b|/]/g;
 
-    console.log(isNum);
+    if (!checkedNum.test(userInput)) {
+      alert('숫자만 입력해주세요');
+      setIsNum('');
+    } else {
+      setIsNum(userInput);
+      if (isNum >= 1000) {
+        alert('1,000 이하로 입력해주세요');
+        setIsNum(() => '1000');
+      }
+    }
   };
 
   return (
@@ -33,7 +40,7 @@ const Second = () => {
         <SelectBox name="moneys" id="moneys">
           {CODE_DATA.map(({ id, code }) => {
             return (
-              <OptionTag key={id} value={code} selected>
+              <OptionTag key={id} value={code}>
                 {code}
               </OptionTag>
             );
