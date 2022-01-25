@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const Second = () => {
@@ -13,21 +13,26 @@ const Second = () => {
 
   const [isNum, setIsNum] = useState('');
 
-  const handleInput = e => {
+  useEffect(() => {
+    console.log(isNum);
+  }, [isNum]);
+
+  async function handleInput(e) {
     let userInput = e.target.value;
     let checkedNum = /[0-9|\b|/]/g;
 
     if (!checkedNum.test(userInput)) {
       alert('숫자만 입력해주세요');
-      setIsNum('');
+      await setIsNum('');
     } else {
-      setIsNum(userInput);
+      await setIsNum(userInput);
       if (isNum >= 1000) {
         alert('1,000 이하로 입력해주세요');
-        setIsNum(() => '1000');
+        await setIsNum(() => '');
       }
     }
-  };
+    // console.log(isNum);
+  }
 
   return (
     <Container>
