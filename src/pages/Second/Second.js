@@ -34,6 +34,15 @@ const Second = () => {
     // console.log(isNum);
   }
 
+  const getToday = () => {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.toLocaleString('en-EN', { month: 'short' });
+    const day = ('0' + date.getDate()).slice(-2);
+
+    return year + '-' + month + '-' + day;
+  };
+
   return (
     <Container>
       <Form>
@@ -62,7 +71,7 @@ const Second = () => {
         </TabList>
         <TabContents>
           <Result>CAD 2,000.00</Result>
-          <ReferDate>기준일 : 2022-Jan-01</ReferDate>
+          <ReferDate>{getToday()}</ReferDate>
         </TabContents>
       </TabWrapper>
     </Container>
