@@ -16,9 +16,10 @@ const Second = () => {
   const [isSelected, setIsSelected] = useState(false);
 
   const handleInput = e => {
-    // const regexp = /d+/g;
+    const regexp = /d+[,]?/g;
     setIsNum(e.target.value);
-    console.log(e.target.value);
+
+    console.log(isNum);
   };
 
   return (
