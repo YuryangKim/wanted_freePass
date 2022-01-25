@@ -7,7 +7,7 @@
 <p>팀장: 이용우 <br>
 팀구성: 김유량, 양주영, 이용우, 홍유진</p>
 
-**배포주소** : http://wanted.freepass.s3-website.ap-northeast-2.amazonaws.com/<br>
+**배포주소** :http://wantedfreepass.s3-website.ap-northeast-2.amazonaws.com/<br>
 **설치 및 시작방법**
 
 - npm i 패키지 설치
@@ -52,9 +52,11 @@
 
 - input창에 숫자만 입력할 수 있는 조건문 작성
 - select box로 미국, 한국, 홍콩, 일본, 캐나다, 중국를 선택할 수 있도록 드롭다운 메뉴 구현
+  ![환율계산기2](https://user-images.githubusercontent.com/75065159/151052450-d5f05b45-96f9-444f-bf21-424628f3b14c.gif)
 - 환율 API 불러오기
 - 사용자가 숫자를 입력하고 드롭다운 메뉴에서 기준이 될 화폐 선택시 환율을 계산하여 해당 탭에 따라 화면에 노출
 - 드롭다운 메뉴에서 선택한 통화와 탭에서 선택한 통화의 환율을 계산하여 화면에 노출
+  ![계산기2](https://user-images.githubusercontent.com/75065159/151052440-9556d821-fbdb-4cea-ae5e-beef7f4231af.gif)
 - 기준일의 형식에 맞는 날짜 포맷팅
 
 ```
