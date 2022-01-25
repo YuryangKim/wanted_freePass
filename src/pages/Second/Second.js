@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const Second = () => {
   const CODE_DATA = [
@@ -19,16 +20,43 @@ const Second = () => {
 
     if (!checkedNum.test(userInput)) {
       alert('숫자만 입력해주세요');
-      await setIsNum('');
+      setIsNum('');
     } else {
-      const regexp = /\B(?=(\d{3})+(?!\d))/g;
-      const addComma = userInput.replace(regexp, ',');
-      // const addComma = Number(userInput).toLocaleString();
-
-      setIsNum(addComma);
+      setIsNum(userInput);
     }
-    // console.log(isNum);
   };
+
+  const getToday = () => {
+    const date = new Date();
+    const year = date.getFullYear();
+    const month = date.toLocaleString('en-EN', { month: 'short' });
+    const day = ('0' + date.getDate()).slice(-2);
+
+    return year + '-' + month + '-' + day;
+  };
+
+  // const [data, setData] = useState();
+  // const [todayData, setTodayData] = useState();
+
+  // useEffect(() => {
+  //   const result = axios
+  //     .get(
+  //       'http://apilayer.net/api/live?access_key=98a575f114ea8d97dd94ca346383fab6'
+  //     )
+  //     .then(res => setData(res.data));
+  //   setTodayData([
+  //     { name: 'USD', value: result.quotes.USDUSD },
+  //     { name: 'KRW', value: result.quotes.USDKRW },
+  //     { name: 'HKD', value: result.quotes.USDHKD },
+  //     { name: 'JPY', value: result.quotes.USDJPY },
+  //     { name: 'CAD', value: result.quotes.USDCAD },
+  //     { name: 'CNY', value: result.quotes.USDCNY },
+  //   ]);
+  // }, []);
+
+  // console.log(setTodayData);
+
+  //각각 환율 바꾸는 로직
 
   return (
     <Container>
@@ -58,7 +86,7 @@ const Second = () => {
         </TabList>
         <TabContents>
           <Result>CAD 2,000.00</Result>
-          <ReferDate>기준일 : 2022-Jan-01</ReferDate>
+          <ReferDate>{getToday()}</ReferDate>
         </TabContents>
       </TabWrapper>
     </Container>
