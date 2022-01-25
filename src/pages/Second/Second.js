@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const Second = () => {
@@ -19,7 +19,7 @@ const Second = () => {
 
     if (!checkedNum.test(userInput)) {
       alert('숫자만 입력해주세요');
-      setIsNum('');
+      await setIsNum('');
     } else {
       const regexp = /\B(?=(\d{3})+(?!\d))/g;
       const addComma = userInput.replace(regexp, ',');
@@ -27,6 +27,7 @@ const Second = () => {
 
       setIsNum(addComma);
     }
+    // console.log(isNum);
   };
 
   return (

@@ -5,7 +5,9 @@ const CopyRight = () => {
   return (
     <CopyRightWrap>
       <SubTitle>해외송금서비스 최초</SubTitle>
-      <MainTitle>한국에서 보낸 송금이 지연되면, 보상쿠폰을 드립니다.</MainTitle>
+      <MainTitle>
+        한국에서 보낸 송금이 지연되면, <br /> 보상쿠폰을 드립니다.
+      </MainTitle>
       <Detail>자세히 보기</Detail>
     </CopyRightWrap>
   );
@@ -13,9 +15,7 @@ const CopyRight = () => {
 
 export default CopyRight;
 
-const CopyRightWrap = styled.div`
-  width: 48%;
-`;
+const CopyRightWrap = styled.div``;
 
 const SubTitle = styled.p`
   display: inline-block;

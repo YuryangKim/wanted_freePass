@@ -10,18 +10,28 @@ const Exchangerate = () => {
 
   const handleSelect = e => {
     setSelected(e.target.value);
+    setPrice('');
   };
+
+  const SelectedSlice = Selected.slice(3, 6);
 
   const setPriceIsValue = e => {
     const { value } = e.target;
-    if (value > 10000 || value == 0 || value < 0) {
-      alert('송금액이 바르지 않습니다. 확인 부탁드립니다.');
-      return setInput('');
-    }
     return setInput(value);
   };
 
   const onSubmit = () => {
+    let regex = /^[0-9]/g;
+    if (Selected === '') {
+      alert('송금액이 바르지 않습니다. 확인 부탁드립니다.');
+      return setInput('');
+    } else if (!regex.test(input)) {
+      alert('송금액이 바르지 않습니다. 확인 부탁드립니다.');
+      return setInput('');
+    } else if (input > 10000 || input <= 0) {
+      alert('송금액이 바르지 않습니다. 확인 부탁드립니다.');
+      return setInput('');
+    }
     return setPrice((input * Math.round(data.quotes[Selected] * 100)) / 100);
   };
 
@@ -32,6 +42,7 @@ const Exchangerate = () => {
       )
       .then(res => setData(res.data));
   }, []);
+
   return (
     <Container>
       <Form>
@@ -44,6 +55,7 @@ const Exchangerate = () => {
             onChange={handleSelect}
             value={Selected}
           >
+            <Option value="">===선택===</Option>
             <Option value="USDKRW">한국(KRW)</Option>
             <Option value="USDJPY">일본(JPY)</Option>
             <Option value="USDPHP">필리핀(PHP)</Option>
@@ -53,17 +65,26 @@ const Exchangerate = () => {
           <Text>환율: </Text>
           <Text>
             {Selected && (
-              <Text>{Math.round(data.quotes[Selected] * 100) / 100}</Text>
+              <Text>
+                {Number(
+                  Math.round(data.quotes[Selected] * 100) / 100
+                ).toLocaleString()}
+                {SelectedSlice}
+                /USD
+              </Text>
             )}
           </Text>
         </ExchangRateWrap>
         <RemittanceWrap>
           <Text>송금액:</Text>
-          <Remittance onChange={setPriceIsValue} />
+          <Remittance onChange={setPriceIsValue} value={input} />
           <Text>USD</Text>
         </RemittanceWrap>
         {price && (
-          <Text>수취금액은 {`${Number(price).toLocaleString()}`} 입니다.</Text>
+          <Text>
+            수취금액은 {`${Number(price).toLocaleString()}`} {SelectedSlice}
+            입니다.
+          </Text>
         )}
         <Submit onClick={onSubmit}>Submit</Submit>
       </Form>
@@ -74,14 +95,13 @@ const Exchangerate = () => {
 export default Exchangerate;
 
 const Container = styled.div`
-  width: 45%;
+  width: 460px;
   background-color: #eef8ee;
   border-radius: 15px;
+  padding: 70px;
 `;
 
-const Form = styled.form`
-  padding: 40px;
-`;
+const Form = styled.form``;
 
 const Title = styled.p`
   color: #333333;
@@ -105,8 +125,11 @@ const ReceiptWrap = styled.div`
 const ReceiptCountry = styled.select.attrs({
   name: 'country',
 })`
+  padding: 0.2rem;
   color: #333333;
-  font-size: 1rem;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  border: 1px solid #d3d7e1;
 `;
 
 const Option = styled.option`
@@ -117,12 +140,16 @@ const RemittanceWrap = styled(ReceiptWrap)``;
 
 const ExchangRateWrap = styled(ReceiptWrap)``;
 
-const Remittance = styled.input`
-  padding: 0.5rem 0;
+const Remittance = styled.input.attrs({
+  placeholder: '송금액을 입력해주세요.',
+})`
+  width: 170px;
+  padding: 0.2rem 0;
   margin-right: 0.3rem;
   border-radius: 5px;
   border: 1px solid #d3d7e1;
   background-color: #fff;
+  font-size: 1rem;
 `;
 
 const Submit = styled.button.attrs({
