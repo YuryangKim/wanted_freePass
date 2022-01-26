@@ -7,7 +7,7 @@
 <p>팀장: 이용우 <br>
 팀구성: 김유량, 양주영, 이용우, 홍유진</p>
 
-**배포주소** : http://wanted.freepass.s3-website.ap-northeast-2.amazonaws.com/<br>
+**배포주소** : http://wantedfreepass.s3-website.ap-northeast-2.amazonaws.com/<br>
 **설치 및 시작방법**
 
 - npm i 패키지 설치
