@@ -62,38 +62,6 @@ const Second = () => {
     return year + '-' + month + '-' + day;
   };
 
-  const getToday = () => {
-    const date = new Date();
-    const year = date.getFullYear();
-    const month = date.toLocaleString('en-EN', { month: 'short' });
-    const day = ('0' + date.getDate()).slice(-2);
-
-    return year + '-' + month + '-' + day;
-  };
-
-  // const [data, setData] = useState();
-  // const [todayData, setTodayData] = useState();
-
-  // useEffect(() => {
-  //   const result = axios
-  //     .get(
-  //       'http://apilayer.net/api/live?access_key=98a575f114ea8d97dd94ca346383fab6'
-  //     )
-  //     .then(res => setData(res.data));
-  //   setTodayData([
-  //     { name: 'USD', value: result.quotes.USDUSD },
-  //     { name: 'KRW', value: result.quotes.USDKRW },
-  //     { name: 'HKD', value: result.quotes.USDHKD },
-  //     { name: 'JPY', value: result.quotes.USDJPY },
-  //     { name: 'CAD', value: result.quotes.USDCAD },
-  //     { name: 'CNY', value: result.quotes.USDCNY },
-  //   ]);
-  // }, []);
-
-  // console.log(setTodayData);
-
-  //각각 환율 바꾸는 로직
-
   return (
     <Container>
       <Form>
