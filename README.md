@@ -20,6 +20,7 @@
 - Build Tool (Create React App)
 - Code Quality Tool (Prettier)
 - Other Tools (Git, Github, notion, Slack. AWS)
+```
 
 <br/>
 
@@ -54,4 +55,3 @@
 - 환율에 따른 드롭다운 메뉴 선택시 해당 화면에 노출
 - 드롭다운 메뉴에서 선택한 통화와 탭에서 선택한 통화의 환율을 계산하여 화면에 노출
 - 기준일의 형식에 맞는 날짜 포맷팅
-```
